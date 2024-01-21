@@ -12,12 +12,6 @@
 <body>
     <!-- <img src="images/background.jpeg" alt="background"> -->
     <h2>Groove Map</h2>
-    <!-- <div class="topnav">
-        <a class="active" href="#home">Home</a>
-        <a href="#news">News</a>
-        <a href="#contact">Contact</a>
-        <a href="#about">About</a>
-    </div> -->
 
     <h1 class="big-text">What's the world listening to? </h1>
     <button class="button button5">Log In</button>
@@ -27,90 +21,217 @@
     <p></p>
     <select name="countries" id="countryList">
     </select>
+   
+    <p id="demo"></p>
+    <p id="demo2"></p>
 
-<!-- <button onclick="getLocation()">Try It</button> -->
-
-<p id="demo"></p>
-<p id="demo2"></p>
-
+    
+    <label for="countrycode">Want to find the top artists and new releases in another country?</label>
+    <input type="text" id="ccinput" name="cc" maxlength="2" />
 
 
-<script>
-const x = document.getElementById("demo");
-const y = document.getElementById("demo2");
-var countryISO;
-var countryName;
+    <h1>Top Artists in the Canadian Market</h1>
+    <div id="artistsList"></div>
 
-var supportedCountries = ["Canada", "USA", "Mexico", "France", "Japan", "China"];
 
-window.onload = function() {
-  getLocation();
-};
+    <h1>Top Ten New Releases in the Canadian Market</h1>
+    <div id="newReleasesList"></div>
 
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition, showError);
-  } else { 
-    x.innerHTML = "Geolocation is not supported by this browser.";
-  }
-}
 
-function showPosition(position) {
-    let lat = position.coords.latitude;
-    let long = position.coords.longitude;
-    x.innerHTML = "Latitude: " + lat + 
-    "<br>Longitude: " + long;
-    getISO(lat, long);
+    <script>
 
-}
+        const x = document.getElementById("demo");
+        const y = document.getElementById("demo2");
+        var countryISO;
+        var countryName;
 
-function showError(error) {
-  switch(error.code) {
-    case error.PERMISSION_DENIED:
-      x.innerHTML = "User denied the request for Geolocation."
-      break;
-    case error.POSITION_UNAVAILABLE:
-      x.innerHTML = "Location information is unavailable."
-      break;
-    case error.TIMEOUT:
-      x.innerHTML = "The request to get user location timed out."
-      break;
-    case error.UNKNOWN_ERROR:
-      x.innerHTML = "An unknown error occurred."
-      break;
-  }
-}
+        var supportedCountries = ["Canada", "USA", "Mexico", "France", "Japan", "China"];
 
-async function getISO(lat, long) {
-    let ISOData
-    let iso = await fetch('http://api.geonames.org/countryCodeJSON?lat=' + lat + '&lng=' + long + '&username=jolee') .then(response => response.json()) .then(data => ISOData = data) .catch(error => console.error(error)); 
-    // let json = JSON.parse(iso);
-    y.innerHTML = "ISO:" + ISOData["countryCode"];
-    countryISO = ISOData["countryCode"];
-    countryName = ISOData["countryName"];
-    makeSelection(countryName)
-    console.log(ISOData);
-}
+        window.onload = function() {
+            getLocation();
+        };
 
-function makeSelection(countryName) {
-    const sel = document.getElementById("countryList");
-    const opt = document.createElement("option");
-    opt.value = countryName;
-    opt.text = countryName;
-    sel.appendChild(opt);
-
-    for(var i = 0; i < supportedCountries.length; i++) {
-        var option = supportedCountries[i];
-        if(option != countryName) {
-            var el = document.createElement("option");
-            el.textContent = option;
-            el.value = option;
-            sel.appendChild(el);
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else { 
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
         }
-    }
-        
-}
 
+        function showPosition(position) {
+            let lat = position.coords.latitude;
+            let long = position.coords.longitude;
+            x.innerHTML = "Latitude: " + lat + 
+            "<br>Longitude: " + long;
+            getISO(lat, long);
+        }
+
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                x.innerHTML = "User denied the request for Geolocation."
+                break;
+                case error.POSITION_UNAVAILABLE:
+                x.innerHTML = "Location information is unavailable."
+                break;
+                case error.TIMEOUT:
+                x.innerHTML = "The request to get user location timed out."
+                break;
+                case error.UNKNOWN_ERROR:
+                x.innerHTML = "An unknown error occurred."
+                break;
+            }
+        }
+
+        async function getISO(lat, long) {
+            let ISOData
+            let iso = await fetch('http://api.geonames.org/countryCodeJSON?lat=' + lat + '&lng=' + long + '&username=jolee') .then(response => response.json()) .then(data => ISOData = data) .catch(error => console.error(error)); 
+            // let json = JSON.parse(iso);
+            y.innerHTML = "ISO:" + ISOData["countryCode"];
+            countryISO = ISOData["countryCode"];
+            countryName = ISOData["countryName"];
+            makeSelection(countryName)
+            console.log(ISOData);
+        }
+
+        function makeSelection(countryName) {
+            const sel = document.getElementById("countryList");
+            const opt = document.createElement("option");
+            opt.value = countryName;
+            opt.text = countryName;
+            sel.appendChild(opt);
+
+            for(var i = 0; i < supportedCountries.length; i++) {
+                var option = supportedCountries[i];
+                if(option != countryName) {
+                    var el = document.createElement("option");
+                    el.textContent = option;
+                    el.value = option;
+                    sel.appendChild(el);
+                }
+            }        
+        }
+        const clientId = '104d640544c349ee94887cff77cc0de5';
+        const clientSecret = 'c534b28af2724744a5c7aeabef3a07ed';
+
+        const apiUrl = 'https://api.spotify.com/v1';
+        const authUrl = 'https://accounts.spotify.com/api/token';
+
+        const base64Credentials = btoa(`${clientId}:${clientSecret}`);
+
+        async function getAccessToken() {
+            const response = await fetch(authUrl, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Basic ${base64Credentials}`,
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'grant_type=client_credentials',
+            });
+
+            const data = await response.json();
+            return data.access_token;
+        }
+
+        async function makeSpotifyApiRequest(endpoint, params = {}) {
+            const accessToken = await getAccessToken();
+
+            const queryString = new URLSearchParams(params).toString();
+            const url = `${apiUrl}/${endpoint}?${queryString}`;
+
+            const response = await fetch(url, {
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                return data;
+            } else {
+                console.error(`Error: ${response.status} - ${response.statusText}`);
+                return null;
+            }
+        }
+
+        function displayArtists(artists) {
+            const artistsListElement = document.getElementById('artistsList');
+            artistsListElement.innerHTML = '';
+            let count = 0;
+            const ul = document.createElement('ul');
+            artists.forEach(artist => {
+                if(count == 10){
+                    return
+                }
+                const li = document.createElement('li');
+                li.textContent = artist;
+                ul.appendChild(li);
+                count+=1;
+                console.log(count);
+                
+            });
+
+            artistsListElement.appendChild(ul);
+        }
+
+        async function getTopArtists() {
+            const country = 'Ca';
+            const categoriesData = await makeSpotifyApiRequest('browse/categories', { country, limit: 50 });
+            const categoryId = categoriesData?.categories?.items?.find(category => category.id === 'toplists')?.id;
+            if (categoryId) {
+                const playlistsData = await makeSpotifyApiRequest(`browse/categories/${categoryId}/playlists`, { country, limit: 1 });
+                const playlistId = playlistsData?.playlists?.items[0]?.id;
+
+                if (playlistId) {
+                    const tracksData = await makeSpotifyApiRequest(`playlists/${playlistId}/tracks`);
+                    if (tracksData) {
+                        
+                        const artists = tracksData?.items?.map(item => item.track?.artists[0]?.name);
+                        displayArtists(artists);
+                    } else {
+                        console.error('Error: Could not get tracks from the playlist.');
+                    }
+                } else {
+                    console.error('Error: Could not find playlist ID.');
+                }
+            } else {
+                console.error('Error: Could not find category ID for "toplists" in Canada.');
+            }
+        }
+        function displayNewReleases(newReleases) {
+            const newReleasesListElement = document.getElementById('newReleasesList');
+            newReleasesListElement.innerHTML = '';
+
+            const ul = document.createElement('ul');
+            newReleases.forEach(release => {
+                const li = document.createElement('li');
+                li.textContent = `${release.name} - ${release.artists[0].name}`;
+                ul.appendChild(li);
+            });
+
+            newReleasesListElement.appendChild(ul);
+        }
+
+        async function getTopNewReleases() {
+            const country = 'CA';
+            const newReleasesData = await makeSpotifyApiRequest('browse/new-releases', { country, limit: 10 });
+            if (newReleasesData?.error?.status === 401) {
+                console.error('Error: Unauthorized. Check your client ID and client secret.');
+                return;
+            }
+            const newReleases = newReleasesData?.albums?.items;
+            if (newReleases) {
+              
+                displayNewReleases(newReleases);
+            } else {
+                console.error('Error: Could not retrieve new releases.');
+            }
+        }
+
+    getTopNewReleases();
+    getTopArtists();
 </script>
+
 </body>
 </html>
