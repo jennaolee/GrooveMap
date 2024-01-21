@@ -7,10 +7,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Montserrat&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f14e943812.js" crossorigin="anonymous"></script>
     <title>GrooveMap</title>
 </head>
 <body>
-    <!-- <img src="images/background.jpeg" alt="background"> -->
     <h2>Groove Map</h2>
 
     <h1 class="big-text">What's the world listening to? </h1>
@@ -29,19 +29,37 @@
     <label for="countrycode">Want to find the top artists and new releases in another country?</label>
     <input type="text" id="ccinput" name="cc" maxlength="2" />
 
+    <div class="top-things">
+        <section class="section dropdown-section">
+            <h3 id="top-artists"></h3>
 
-    <h1>Top Artists in the Canadian Market</h1>
-    <div id="artistsList"></div>
+        </section>
 
+        <section class="artist dropdown-artist">
+            <i class="fa-solid fa-user-plus fa-2x"></i>
 
-    <h1>Top Ten New Releases in the Canadian Market</h1>
-    <div id="newReleasesList"></div>
+        </section>
+
+        <div id="artistsList"></div>
+    
+    
+        <section class="section dropdown-section">
+            <h3 id="top-new-releases"></h3>
+        </section>
+        <div id="newReleasesList"></div>
+    </div>
+
+    
+    
 
 
     <script>
 
         const x = document.getElementById("demo");
         const y = document.getElementById("demo2");
+        const topArtists = document.getElementById("top-artists");
+        const topNewReleases = document.getElementById("top-new-releases");
+
         var countryISO;
         var countryName;
 
@@ -65,6 +83,7 @@
             x.innerHTML = "Latitude: " + lat + 
             "<br>Longitude: " + long;
             getISO(lat, long);
+
         }
 
         function showError(error) {
@@ -91,7 +110,8 @@
             y.innerHTML = "ISO:" + ISOData["countryCode"];
             countryISO = ISOData["countryCode"];
             countryName = ISOData["countryName"];
-            makeSelection(countryName)
+            makeSelection(countryName);
+            makeDropdowns(countryName);
             console.log(ISOData);
         }
 
@@ -111,6 +131,12 @@
                     sel.appendChild(el);
                 }
             }        
+        }
+
+        function makeDropdowns(countryName) {
+            topArtists.innerHTML = "Top Artists in " + countryName;
+            topNewReleases.innerHTML = "Top New Releases in " + countryName;
+
         }
         const clientId = '104d640544c349ee94887cff77cc0de5';
         const clientSecret = 'c534b28af2724744a5c7aeabef3a07ed';

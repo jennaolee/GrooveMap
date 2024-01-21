@@ -1,45 +1,14 @@
 body {
-    /* background-image: url("images/gif_background.gif");  */
-    background-color: blue;
-    background-repeat: no-repeat;
-    background-size: 1600px, 787px;
-    /* color: #f2f2f2; */
-    /* margin: 1rem; */
-
-    /* background-image: url('/Users/jennalee/Development/GrooveMap/GrooveMap/images/gif_background.gif'); */
+    /* background-image: url('/Users/jennalee/Development/GrooveMap/GrooveMap/images/gif_background.gif');
     background-size: cover;
-    /* height: 100vh; */
+    height: 100vh;
     margin: 2rem;
     color: white;
-    font-family: "Montserrat display";
+    font-family: "Montserrat display"; */
+
+    background-color: blue;
 }
 
-.topnav {
-    background-color: #333;
-    overflow: hidden;
-}
-  
-/* Style the links inside the navigation bar */
-.topnav a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-}
-  
-/* Change the color of links on hover */
-.topnav a:hover {
-    background-color: #ddd;
-    color: black;
-}
-  
-/* Add a color to the active/current link */
- .topnav a.active {
-    background-color: #04AA6D;
-    color: white;
-}
 
 .button {
     background-color: #7503b3;
@@ -75,6 +44,29 @@ body {
     border-color: white;
 }
 
+.section {
+    background-color: #7503b3;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0px 30px 0px 0px;
+}
+  
+ 
+.dropdown-section {
+    border-radius: 20px;
+    width: 1275px;
+    height: 150px;
+    background-color: white;
+    color: #7503b3;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #7503b3;
+}
+
 h1 {
     font-family: "Dela Gothic One";
     font-size: 60px;
@@ -83,6 +75,11 @@ h1 {
 h2 {
     font-family: "Dela Gothic One";
     font-size: 25px; 
+}
+
+h3 {
+    font-family: "Dela Gothic One";
+    font-size: 40px; 
 }
 
 .big-text {
@@ -103,4 +100,48 @@ select {
     border-style: solid;
     border-width: 2px;
     border-color: white;
+}
+
+.follow-section {
+    border-radius: 20px;
+    width: 1400px;
+    height: 75px;
+    background-color: white;
+    color: #7503b3;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #7503b3;
+
+}
+
+
+
+.top-things {
+    background-color: black;
+    padding: 5rem;
+    margin: 0px
+}
+
+.artist {
+    background-color: #7503b3;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0px 30px 0px 0px;
+}
+  
+ 
+.dropdown-artist {
+    border-radius: 20px;
+    width: 1275px;
+    height: 100px;
+    background-color: white;
+    color: #7503b3;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #7503b3;
+
 }
