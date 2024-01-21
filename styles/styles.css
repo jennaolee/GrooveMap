@@ -1,12 +1,10 @@
 body {
-    /* background-image: url('/Users/jennalee/Development/GrooveMap/GrooveMap/images/gif_background.gif');
+    background-image: url('/Users/jennalee/Development/GrooveMap/GrooveMap/images/gif_background.gif');
     background-size: cover;
     height: 100vh;
     margin: 2rem;
     color: white;
-    font-family: "Montserrat display"; */
-
-    background-color: blue;
+    font-family: "Montserrat display";
 }
 
 
@@ -54,17 +52,16 @@ body {
     font-size: 16px;
     margin: 0px 30px 0px 0px;
 }
-  
- 
+
 .dropdown-section {
     border-radius: 20px;
     width: 1275px;
     height: 150px;
-    background-color: white;
-    color: #7503b3;
+    background-color: #7503b3;
+    color: white;
     border-style: solid;
     border-width: 2px;
-    border-color: #7503b3;
+    border-color: white;
 }
 
 h1 {
@@ -106,7 +103,7 @@ select {
     border-radius: 20px;
     width: 1400px;
     height: 75px;
-    background-color: white;
+    background-color: #7503b3;
     color: #7503b3;
     border-style: solid;
     border-width: 2px;
@@ -144,4 +141,94 @@ select {
     border-width: 2px;
     border-color: #7503b3;
 
+}
+
+.follow-btn {
+    position: relative;
+    top: 65px;
+    left: 1125px;
+    color: #7503b3;
+
+    
+}
+
+.follow-btn:hover {
+
+    color: #4c0672;
+    cursor: pointer;
+
+    
+}
+
+.artistsList {
+    list-style-type: none;
+    display: none;
+
+
+}
+
+.artistsList li {
+    /* font-family: "Dela Gothic One"; */
+
+    /* background-color: #7503b3; */
+    /* border: none;
+    color: white; */
+    /* text-align: center; */
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    padding-left: 30px;
+    padding-top: 30px;
+    margin: 0px 30px 0px 0px;
+    border-radius: 20px;
+    width: 1200px;
+    height: 60px;
+    background-color: white;
+    color: #7503b3;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #7503b3;
+    /* font-family: "Montserrat display"; */
+
+}
+
+.newReleasesList {
+    list-style-type: none;
+    display: none;
+
+}
+
+.newReleasesList li {
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    padding-left: 30px;
+    padding-top: 30px;
+    margin: 0px 30px 0px 0px;
+    border-radius: 20px;
+    width: 1200px;
+    height: 60px;
+    background-color: white;
+    color: #7503b3;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #7503b3;
+    font-family: "Montserrat display";
+
+}
+
+.spacer {
+    height: 80px;
+}
+
+.dropdown-btn {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    width: 1275px;
+    height: 150px;
 }

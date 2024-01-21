@@ -26,27 +26,28 @@
     <p id="demo2"></p>
 
     
-    <label for="countrycode">Want to find the top artists and new releases in another country?</label>
-    <input type="text" id="ccinput" name="cc" maxlength="2" />
+    <!-- <label for="countrycode">Want to find the top artists and new releases in another country?</label>
+    <input type="text" id="ccinput" name="cc" maxlength="2" /> -->
 
     <div class="top-things">
         <section class="section dropdown-section">
+            <button class="dropdown-btn" onclick="showArtists()">
             <h3 id="top-artists"></h3>
+        </button>
 
         </section>
 
-        <section class="artist dropdown-artist">
-            <i class="fa-solid fa-user-plus fa-2x"></i>
+        <ul id="artistsList" class="artistsList">
+        </ul>
+        <div class="spacer"></div>
 
-        </section>
-
-        <div id="artistsList"></div>
-    
     
         <section class="section dropdown-section">
-            <h3 id="top-new-releases"></h3>
+            <button class="dropdown-btn" onclick="showReleases()"></i>
+                <h3 id="top-new-releases"></h3>
+            </button>
         </section>
-        <div id="newReleasesList"></div>
+        <ul id="newReleasesList" class="newReleasesList"></ul>
     </div>
 
     
@@ -69,19 +70,38 @@
             getLocation();
         };
 
+        function showArtists() {
+            var x = document.getElementById("artistsList");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function showReleases() {
+            var x = document.getElementById("newReleasesList");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition, showError);
             } else { 
-                x.innerHTML = "Geolocation is not supported by this browser.";
+                // x.innerHTML = "Geolocation is not supported by this browser.";
+                alert("Geolocation is not supported by this browser.");
             }
         }
 
         function showPosition(position) {
             let lat = position.coords.latitude;
             let long = position.coords.longitude;
-            x.innerHTML = "Latitude: " + lat + 
-            "<br>Longitude: " + long;
+            // x.innerHTML = "Latitude: " + lat + 
+            // "<br>Longitude: " + long;
             getISO(lat, long);
 
         }
@@ -89,16 +109,24 @@
         function showError(error) {
             switch(error.code) {
                 case error.PERMISSION_DENIED:
-                x.innerHTML = "User denied the request for Geolocation."
+                // x.innerHTML = "User denied the request for Geolocation."
+                alert("User denied the request for Geolocation.");
+                countryISO = "CA";
+                countryName = "Canada";
+                makeSelection(countryName);
+                makeDropdowns(countryName);
                 break;
                 case error.POSITION_UNAVAILABLE:
-                x.innerHTML = "Location information is unavailable."
+                // x.innerHTML = "Location information is unavailable."
+                alert("Location information is unavailable.");
                 break;
                 case error.TIMEOUT:
                 x.innerHTML = "The request to get user location timed out."
+                alert("The request to get user location timed out.");
                 break;
                 case error.UNKNOWN_ERROR:
                 x.innerHTML = "An unknown error occurred."
+                alert("An unknown error occurred.");
                 break;
             }
         }
@@ -107,7 +135,7 @@
             let ISOData
             let iso = await fetch('http://api.geonames.org/countryCodeJSON?lat=' + lat + '&lng=' + long + '&username=jolee') .then(response => response.json()) .then(data => ISOData = data) .catch(error => console.error(error)); 
             // let json = JSON.parse(iso);
-            y.innerHTML = "ISO:" + ISOData["countryCode"];
+            // y.innerHTML = "ISO:" + ISOData["countryCode"];
             countryISO = ISOData["countryCode"];
             countryName = ISOData["countryName"];
             makeSelection(countryName);
@@ -185,7 +213,7 @@
             const artistsListElement = document.getElementById('artistsList');
             artistsListElement.innerHTML = '';
             let count = 0;
-            const ul = document.createElement('ul');
+            const ul = document.getElementById('artistsList');
             artists.forEach(artist => {
                 if(count == 10){
                     return
@@ -193,6 +221,9 @@
                 const li = document.createElement('li');
                 li.textContent = artist;
                 ul.appendChild(li);
+                const i = document.createElement('i');
+                i.className = "fa-solid fa-user-plus fa-2x follow-btn";
+                ul.insertBefore(i, li);
                 count+=1;
                 console.log(count);
                 
@@ -229,11 +260,15 @@
             const newReleasesListElement = document.getElementById('newReleasesList');
             newReleasesListElement.innerHTML = '';
 
-            const ul = document.createElement('ul');
+            const ul = document.getElementById('newReleasesList');
+
             newReleases.forEach(release => {
                 const li = document.createElement('li');
                 li.textContent = `${release.name} - ${release.artists[0].name}`;
                 ul.appendChild(li);
+                const i = document.createElement('i');
+                i.className = "fa-solid fa-heart fa-2x follow-btn";
+                ul.insertBefore(i, li);
             });
 
             newReleasesListElement.appendChild(ul);
