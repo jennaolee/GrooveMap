@@ -1,3 +1,11 @@
+body {
+    background-image: url("/Users/jennalee/Development/GrooveMap/GrooveMap/images/background.jpeg"); 
+    background-repeat: no-repeat;
+    background-size: 1600px, 787px;
+    color: #f2f2f2;
+    margin: 1rem;
+}
+
 .topnav {
     background-color: #333;
     overflow: hidden;
@@ -25,7 +33,7 @@
     color: white;
 }
 .button {
-    background-color: #04AA6D;
+    background-color: #7503b3;
     border: none;
     color: white;
     padding: 20px;
@@ -33,7 +41,7 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    margin: 0px 30px 0px 0px;
 }
   
  
@@ -42,12 +50,38 @@
     width: 200px;
 }
 
+.signup {
+    background-color: white;
+    color: #7503b3;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #7503b3;
+}
+
 h1 {
     font-family: "Dela Gothic One";
-    font-size: 50px;
+    font-size: 60px;
 }
 
 h2 {
     font-family: "Dela Gothic One";
     font-size: 25px; 
+}
+
+.big-text {
+    margin: 15rem 0rem 1rem;
+
+}
+
+select {
+    background-color: #7503b3;
+    width: 200px;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 14rem 0px;
 }
