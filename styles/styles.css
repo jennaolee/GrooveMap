@@ -1,5 +1,6 @@
 body {
-    background-image: url('/Users/jennalee/Development/GrooveMap/GrooveMap/images/gif_background.gif');
+    background-image: url('images/gif_background.gif');
+    background-color: rgb(0, 0, 192);
     background-size: cover;
     height: 100vh;
     color: white;
