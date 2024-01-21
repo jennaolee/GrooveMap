@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="styles.css" />
-    <title>GrooveMusic</title>
+    <link rel="stylesheet" type="text/css" href="styles/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Montserrat&display=swap" rel="stylesheet">
+    <title>GrooveMap</title>
 </head>
 <body>
-    <h1>Groove Map</h1>
+    <h2>Groove Map</h2>
     <div class="topnav">
         <a class="active" href="#home">Home</a>
         <a href="#news">News</a>
@@ -15,22 +18,15 @@
         <a href="#about">About</a>
       </div>
 
-    <h2>Whats the world listening to? </h2>
-    <button class="button button5">30%</button>
-    <button class="button button5">50%</button>
+    <h1>Whats the world listening to? </h1>
+    <button class="button button5">Log In</button>
+    <button class="button button5">Sign Up</button>
 
 
-    <select name="cars" id="cars">
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
+    <select name="countries" id="countryList">
     </select>
 
-    <h1>HTML Geolocation</h1>
-<p>Click the button to get your coordinates.</p>
-
-<button onclick="getLocation()">Try It</button>
+<!-- <button onclick="getLocation()">Try It</button> -->
 
 <p id="demo"></p>
 <p id="demo2"></p>
@@ -40,6 +36,14 @@
 <script>
 const x = document.getElementById("demo");
 const y = document.getElementById("demo2");
+var countryISO;
+var countryName;
+
+var supportedCountries = ["Canada", "USA", "Mexico", "France", "Japan", "China"];
+
+window.onload = function() {
+  getLocation();
+};
 
 function getLocation() {
   if (navigator.geolocation) {
@@ -80,8 +84,31 @@ async function getISO(lat, long) {
     let iso = await fetch('http://api.geonames.org/countryCodeJSON?lat=' + lat + '&lng=' + long + '&username=jolee') .then(response => response.json()) .then(data => ISOData = data) .catch(error => console.error(error)); 
     // let json = JSON.parse(iso);
     y.innerHTML = "ISO:" + ISOData["countryCode"];
+    countryISO = ISOData["countryCode"];
+    countryName = ISOData["countryName"];
+    makeSelection(countryName)
     console.log(ISOData);
 }
+
+function makeSelection(countryName) {
+    const sel = document.getElementById("countryList");
+    const opt = document.createElement("option");
+    opt.value = countryName;
+    opt.text = countryName;
+    sel.add(opt, null);
+
+    for(var i = 0; i < supportedCountries.length; i++) {
+        var option = supportedCountries[i];
+        if(option != countryName) {
+            var el = document.createElement("option");
+            el.textContent = option;
+            el.value = option;
+            sel.appendChild(el);
+        }
+    }
+        
+}
+
 </script>
 </body>
 </html>
