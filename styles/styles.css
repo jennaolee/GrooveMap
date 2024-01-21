@@ -2,9 +2,12 @@ body {
     background-image: url('/Users/jennalee/Development/GrooveMap/GrooveMap/images/gif_background.gif');
     background-size: cover;
     height: 100vh;
-    margin: 2rem;
     color: white;
     font-family: "Montserrat display";
+}
+
+.main {
+    margin: 2rem;
 }
 
 
@@ -116,7 +119,7 @@ select {
 .top-things {
     background-color: black;
     padding: 5rem;
-    margin: 0px
+    margin: 0px; 
 }
 
 .artist {
