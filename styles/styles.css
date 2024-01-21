@@ -1,13 +1,14 @@
 body {
-    /* background-image: url("/Users/jennalee/Development/GrooveMap/GrooveMap/images/background.jpeg"); 
+    /* background-image: url("images/gif_background.gif");  */
+    background-color: blue;
     background-repeat: no-repeat;
     background-size: 1600px, 787px;
-    color: #f2f2f2;
-    margin: 1rem; */
+    /* color: #f2f2f2; */
+    /* margin: 1rem; */
 
-    background-image: url('/Users/jennalee/Development/GrooveMap/GrooveMap/images/gif_background.gif');
+    /* background-image: url('/Users/jennalee/Development/GrooveMap/GrooveMap/images/gif_background.gif'); */
     background-size: cover;
-    height: 100vh;
+    /* height: 100vh; */
     margin: 2rem;
     color: white;
     font-family: "Montserrat display";
